@@ -1,0 +1,1265 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Answer 💜</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    font-family: "Poppins", "Segoe UI", sans-serif;
+
+    background:
+        radial-gradient(circle at 10% 10%, #e4b5ff, transparent 30%),
+        radial-gradient(circle at 90% 90%, #d28aff, transparent 30%),
+        linear-gradient(135deg, #4b1d68, #6a1b9a, #9b59b6);
+
+    color: white;
+}
+
+
+/* =========================
+   FALLING HEARTS
+========================= */
+
+.hearts {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.heart {
+    position: absolute;
+    top: -50px;
+
+    color: rgba(255, 220, 255, .8);
+
+    animation: fall linear infinite;
+}
+
+.heart:nth-child(1) {
+    left: 5%;
+    animation-duration: 7s;
+}
+
+.heart:nth-child(2) {
+    left: 18%;
+    animation-duration: 10s;
+    animation-delay: 2s;
+}
+
+.heart:nth-child(3) {
+    left: 35%;
+    animation-duration: 8s;
+    animation-delay: 1s;
+}
+
+.heart:nth-child(4) {
+    left: 50%;
+    animation-duration: 11s;
+    animation-delay: 3s;
+}
+
+.heart:nth-child(5) {
+    left: 65%;
+    animation-duration: 8s;
+    animation-delay: 2s;
+}
+
+.heart:nth-child(6) {
+    left: 80%;
+    animation-duration: 9s;
+    animation-delay: 4s;
+}
+
+.heart:nth-child(7) {
+    left: 93%;
+    animation-duration: 7s;
+    animation-delay: 1s;
+}
+
+
+/* =========================
+   MUSIC
+========================= */
+
+.music-btn {
+    position: fixed;
+
+    top: 18px;
+    right: 18px;
+
+    width: 48px;
+    height: 48px;
+
+    border: 1px solid rgba(255,255,255,.4);
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.18);
+
+    backdrop-filter: blur(10px);
+
+    color: white;
+    font-size: 20px;
+
+    cursor: pointer;
+
+    z-index: 100;
+
+    transition: .3s;
+}
+
+.music-btn:hover {
+    transform: scale(1.1);
+}
+
+.music-btn.playing {
+    animation: musicPulse 1.2s infinite;
+}
+
+
+/* =========================
+   SCREENS
+========================= */
+
+.screen {
+    min-height: 100vh;
+
+    padding: 80px 20px;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    z-index: 2;
+}
+
+.screen.active {
+    display: flex;
+
+    animation: appear .7s ease;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+    width: min(92%, 650px);
+
+    padding: 50px 30px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,.14);
+
+    border: 1px solid rgba(255,255,255,.35);
+
+    border-radius: 35px;
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 25px 70px rgba(30,0,60,.4),
+        inset 0 1px 1px rgba(255,255,255,.3);
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.sparkle {
+    font-size: 40px;
+    margin-bottom: 15px;
+
+    animation: sparkle 2s infinite;
+}
+
+.small-text {
+    color: #f6dcff;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: white;
+
+    font-size: clamp(30px, 7vw, 50px);
+
+    line-height: 1.25;
+
+    text-shadow:
+        0 5px 20px rgba(60,0,100,.5);
+}
+
+.highlight {
+    color: #ffd6ff;
+
+    font-family: Georgia, serif;
+
+    font-style: italic;
+}
+
+.message {
+    margin-top: 25px;
+
+    color: #f9eaff;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================
+   QUESTION
+========================= */
+
+.question {
+    display: inline-block;
+
+    margin-top: 25px;
+
+    padding: 12px 25px;
+
+    border-radius: 50px;
+
+    background: rgba(255,255,255,.14);
+
+    border: 1px solid rgba(255,255,255,.3);
+
+    color: white;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.button {
+    margin-top: 25px;
+
+    padding: 15px 35px;
+
+    border: none;
+
+    border-radius: 50px;
+
+    background: white;
+
+    color: #7625a4;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px rgba(40,0,70,.35);
+
+    transition: all .3s ease;
+}
+
+.button:hover {
+    transform: scale(1.08);
+}
+
+.button:active {
+    transform: scale(.95);
+}
+
+
+/* =========================
+   NO SCREEN
+========================= */
+
+.no-emoji {
+    font-size: 60px;
+
+    animation: funnyBounce 1s infinite;
+}
+
+.no-text {
+    font-size: clamp(70px, 18vw, 130px);
+
+    font-weight: 900;
+
+    letter-spacing: 8px;
+
+    color: white;
+
+    text-shadow:
+        0 0 10px #ffb3ff,
+        0 0 30px #d896ff;
+
+    animation: shake .7s ease;
+}
+
+.joke {
+    margin-top: 15px;
+
+    color: #ffe5ff;
+
+    font-size: 18px;
+
+    line-height: 1.8;
+}
+
+.joke strong {
+    color: white;
+
+    font-size: 21px;
+}
+
+
+/* =========================
+   FINAL SCREEN
+========================= */
+
+#screen3 {
+    align-items: flex-start;
+
+    padding-top: 70px;
+}
+
+
+/* =========================
+   FINAL TITLE
+========================= */
+
+.real-title {
+    color: white;
+
+    font-size: clamp(28px, 7vw, 48px);
+
+    margin-bottom: 30px;
+
+    animation: realTitle .9s ease both;
+}
+
+.real-title span {
+    color: #ffd6ff;
+
+    font-family: Georgia, serif;
+
+    font-style: italic;
+}
+
+
+/* =========================
+   PHOTO
+========================= */
+
+.photo-frame {
+    width: min(85%, 360px);
+
+    height: 300px;
+
+    margin: auto;
+
+    padding: 10px;
+
+    background: rgba(255,255,255,.9);
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 20px 45px rgba(40,0,70,.4);
+
+    transform: rotate(-2deg);
+
+    opacity: 0;
+
+    animation: photoAppear 1s ease .6s forwards;
+
+    transition: .4s;
+}
+
+.photo-frame:hover {
+    transform: rotate(0deg) scale(1.03);
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 18px;
+}
+
+
+/* =========================
+   FINAL MESSAGE
+========================= */
+
+.real-message {
+    margin-top: 35px;
+
+    color: #fff0ff;
+
+    font-size: 16px;
+
+    line-height: 2;
+
+    opacity: 0;
+
+    animation: messageAppear 1s ease 1.2s forwards;
+}
+
+
+/* =========================
+   YES
+========================= */
+
+.yes {
+    display: block;
+
+    margin: 25px 0;
+
+    color: #ffd6ff;
+
+    font-size: clamp(28px, 7vw, 45px);
+
+    font-weight: 900;
+
+    text-shadow:
+        0 5px 20px rgba(60,0,100,.5);
+
+    opacity: 0;
+
+    animation:
+        yesAppear 1s ease 2.2s forwards,
+        yesGlow 2s ease-in-out 3.2s infinite;
+}
+
+
+/* =========================
+   LOVE
+========================= */
+
+.love {
+    margin-top: 25px;
+
+    color: #ffd6ff;
+
+    font-size: 30px;
+
+    letter-spacing: 8px;
+
+    animation: loveAppear 1s ease 2.8s both;
+}
+
+
+/* =========================
+   ORIGINAL ANIMATIONS
+========================= */
+
+@keyframes appear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(35px)
+            scale(.95);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes sparkle {
+
+    0%, 100% {
+        transform:
+            scale(1)
+            rotate(0);
+    }
+
+    50% {
+        transform:
+            scale(1.25)
+            rotate(10deg);
+    }
+}
+
+
+@keyframes funnyBounce {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+
+@keyframes shake {
+
+    0%,100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-12px);
+    }
+
+    50% {
+        transform: translateX(12px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+}
+
+
+@keyframes fall {
+
+    0% {
+        top: -50px;
+
+        opacity: 0;
+
+        transform: rotate(0);
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 110vh;
+
+        opacity: 0;
+
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================
+   NEW FINAL ANIMATIONS
+========================= */
+
+@keyframes realTitle {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(-35px)
+            scale(.85);
+    }
+
+    60% {
+        opacity: 1;
+
+        transform:
+            translateY(8px)
+            scale(1.04);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes photoAppear {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            rotate(-8deg)
+            scale(.65)
+            translateY(40px);
+    }
+
+    70% {
+        opacity: 1;
+
+        transform:
+            rotate(2deg)
+            scale(1.04)
+            translateY(-5px);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            rotate(-2deg)
+            scale(1)
+            translateY(0);
+    }
+}
+
+
+@keyframes messageAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes yesAppear {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            scale(.3)
+            translateY(30px);
+
+        filter: blur(8px);
+    }
+
+    60% {
+        opacity: 1;
+
+        transform:
+            scale(1.12)
+            translateY(-5px);
+
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+
+@keyframes yesGlow {
+
+    0%,100% {
+        text-shadow:
+            0 5px 20px rgba(60,0,100,.5);
+    }
+
+    50% {
+        text-shadow:
+            0 0 10px #ffffff,
+            0 0 25px #ffd6ff,
+            0 0 50px #e5a3ff;
+    }
+}
+
+
+@keyframes loveAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(.5)
+            translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+
+@keyframes musicPulse {
+
+    0%,100% {
+        box-shadow:
+            0 0 0 0 rgba(255,255,255,.3);
+    }
+
+    50% {
+        box-shadow:
+            0 0 0 10px rgba(255,255,255,0);
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:500px) {
+
+    .screen {
+        padding: 75px 15px;
+    }
+
+    .card {
+        padding: 40px 20px;
+    }
+
+    .message {
+        font-size: 14px;
+    }
+
+    .joke {
+        font-size: 15px;
+    }
+
+    .photo-frame {
+        height: 330px;
+    }
+
+    .real-message {
+        font-size: 14px;
+    }
+
+    .yes {
+        font-size: 30px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- FALLING HEARTS -->
+
+<div class="hearts">
+
+    <div class="heart">💜</div>
+    <div class="heart">💗</div>
+    <div class="heart">💜</div>
+    <div class="heart">💕</div>
+    <div class="heart">💜</div>
+    <div class="heart">💗</div>
+    <div class="heart">💕</div>
+
+</div>
+
+
+<!-- MUSIC BUTTON -->
+
+<button
+    class="music-btn"
+    id="musicBtn"
+    onclick="toggleMusic()"
+>
+    🔇
+</button>
+
+
+<!-- MUSIC -->
+
+<audio
+    id="music"
+    loop
+    preload="auto"
+>
+    <source
+        src="Dear by Ben&Ben - Dear (Lyrics)_1789788132900.mp3"
+        type="audio/mpeg"
+    >
+</audio>
+
+
+<!-- =========================
+     SCREEN 1
+========================= -->
+
+<section
+    id="screen1"
+    class="screen active"
+>
+
+    <div class="card">
+
+        <div class="sparkle">
+            ✨
+        </div>
+
+        <div class="small-text">
+            A little question for you
+        </div>
+
+        <h1>
+
+            Are you ready to know what
+
+            <br>
+
+            my
+            <span class="highlight">
+                answer
+            </span>
+            is,
+
+            <br>
+
+            law²? 💜
+
+        </h1>
+
+
+        <p class="message">
+
+            Maybe you've been waiting
+            for this moment...
+
+            <br>
+
+            so, are you really ready? 😅💕
+
+        </p>
+
+
+        <div class="question">
+            Take a deep breath... 💜
+        </div>
+
+
+        <br>
+
+
+        <button
+            class="button"
+            onclick="showScreen(2)"
+        >
+
+            💌 See My Answer
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SCREEN 2
+========================= -->
+
+<section
+    id="screen2"
+    class="screen"
+>
+
+    <div class="card">
+
+        <div class="no-emoji">
+            😭
+        </div>
+
+        <div class="no-text">
+            NO!
+        </div>
+
+
+        <p class="joke">
+
+            HAHAHAHAHA 😂😂😂
+
+            <br><br>
+
+            <strong>
+                IT'S A JOKE! 😭
+            </strong>
+
+            <br>
+
+            Don't panic, law. 😂
+
+            <br>
+
+            I just wanted to make you nervous first. 💜
+
+        </p>
+
+
+        <div style="
+            margin-top:25px;
+            color:#f5d0ff;
+            font-size:20px;
+            letter-spacing:8px;
+        ">
+
+            💜 💕 💗 💕 💜
+
+        </div>
+
+
+        <button
+            class="button"
+            onclick="showScreen(3)"
+        >
+
+            💜 YES, CONTINUE
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SCREEN 3
+========================= -->
+
+<section
+    id="screen3"
+    class="screen"
+>
+
+    <div class="card">
+
+        <div class="sparkle">
+            ✨💜✨
+        </div>
+
+
+        <h1 class="real-title">
+
+            Okay...
+
+            <br>
+
+            <span>
+                here's my real answer.
+            </span>
+
+            💕
+
+        </h1>
+
+
+        <!-- PHOTO -->
+
+        <div class="photo-frame">
+
+            <img
+                src="yes.jpg"
+                alt="My Picture"
+            >
+
+        </div>
+
+
+        <!-- FINAL MESSAGE -->
+
+        <div class="real-message">
+
+            You actually made it this far... 🥺💕
+
+            <br><br>
+
+            And yes, this time I'm not joking anymore. 💜
+
+            <br><br>
+
+            I've thought about your question,
+            and honestly, I really appreciate the courage
+            it took for you to ask me.
+
+            <br><br>
+
+            I appreciate your effort,
+            your sincerity, and the way you've been
+            showing me your intentions.
+
+            <br><br>
+
+            I don't want to rush anything.
+            I want us to take our time,
+            get to know each other even more,
+            and let things happen naturally.
+
+            <span class="yes">
+
+                YES, YOU CAN COURT ME. 💜
+
+            </span>
+
+            I'm giving you a chance. 🥺💕
+
+            <br><br>
+
+            No pressure.
+            No need to rush.
+
+            <br>
+
+            Just be yourself,
+            be genuine,
+            and let me get to know the real you.
+
+            <br><br>
+
+            Let's see where this little beginning
+            takes us. 💕
+
+            <br><br>
+
+            And good luck, law² sana makaya mo...
+
+            <br>
+
+            because now that I've said yes,
+
+            <br><br>
+
+            <strong>
+                THE COURTING OFFICIALLY BEGINS. 💜💕
+            </strong>
+
+        </div>
+
+
+        <div class="love">
+
+            💜 💕 💗 💕 💜
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =========================
+   MUSIC
+========================= */
+
+const music =
+    document.getElementById("music");
+
+const musicBtn =
+    document.getElementById("musicBtn");
+
+
+/* =========================
+   SHOW SCREEN
+========================= */
+
+function showScreen(number) {
+
+    /*
+       Hide all screens
+    */
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(function(screen) {
+
+            screen.classList.remove("active");
+
+        });
+
+
+    /*
+       Show selected screen
+    */
+
+    const selected =
+        document.getElementById(
+            "screen" + number
+        );
+
+    selected.classList.add("active");
+
+
+    /*
+       Scroll to the top
+    */
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+
+    /*
+       START MUSIC ONLY
+       WHEN REAL ANSWER APPEARS
+    */
+
+    if (number === 3) {
+
+        startMusic();
+
+    }
+
+}
+
+
+/* =========================
+   START MUSIC
+========================= */
+
+function startMusic() {
+
+    /*
+       Don't restart the music
+       if it is already playing.
+    */
+
+    if (!music.paused) {
+
+        musicBtn.innerHTML = "🎵";
+
+        musicBtn.classList.add("playing");
+
+        return;
+
+    }
+
+
+    /*
+       The user just clicked
+       "YES, CONTINUE", so the
+       browser should allow playback.
+    */
+
+    music.play()
+        .then(function() {
+
+            musicBtn.innerHTML = "🎵";
+
+            musicBtn.classList.add("playing");
+
+        })
+        .catch(function(error) {
+
+            console.log(
+                "Music autoplay was blocked:",
+                error
+            );
+
+        });
+
+}
+
+
+/* =========================
+   MUSIC BUTTON
+========================= */
+
+function toggleMusic() {
+
+    if (music.paused) {
+
+        music.play()
+            .then(function() {
+
+                musicBtn.innerHTML = "🎵";
+
+                musicBtn.classList.add("playing");
+
+            })
+            .catch(function(error) {
+
+                console.log(error);
+
+            });
+
+    } else {
+
+        music.pause();
+
+        musicBtn.innerHTML = "🔇";
+
+        musicBtn.classList.remove("playing");
+
+    }
+
+}
+
+
+/* =========================
+   MUSIC EVENTS
+========================= */
+
+music.addEventListener("play", function() {
+
+    musicBtn.innerHTML = "🎵";
+
+    musicBtn.classList.add("playing");
+
+});
+
+
+music.addEventListener("pause", function() {
+
+    musicBtn.innerHTML = "🔇";
+
+    musicBtn.classList.remove("playing");
+
+});
+
+</script>
+
+</body>
+</html
